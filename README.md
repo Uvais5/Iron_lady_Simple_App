@@ -41,6 +41,22 @@ The AI integration is powered by **Google Gemini AI** via the `google.generative
 ## Installation
 
 ### 1. Clone the repository
+
 ```bash
-git clone https://github.com/yourusername/productivity-webapp.git
-cd productivity-webapp
+git clone https://github.com/Uvais5/Iron_lady_Simple_App.git
+cd Iron_lady_Simple_App
+```
+### 2. Install dependencies
+```
+pip install -r requirements.txt
+```
+### 3. Set up environment variables
+
+Create a .env file in the project root:
+```
+GOOGLE_API_KEY=your_google_generative_ai_api_key_here
+```
+### 4. Run the Flask Application
+```
+python app.py
+```
