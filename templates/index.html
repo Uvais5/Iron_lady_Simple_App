@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Lady | Programs Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1a202c;
+        }
+        .oswald-font {
+            font-family: 'Oswald', sans-serif;
+        }
+        .iron-lady-header {
+            background-color: #ffffff;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .iron-lady-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: #d1121d;
+        }
+        .program-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+        }
+        .section-title {
+            color: #d1121d;
+            font-size: 2.5rem;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-btn.active {
+            color: #d1121d;
+            border-color: #d1121d;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Main Header -->
+    <header class="iron-lady-header py-4 px-8 flex flex-col sm:flex-row justify-between items-center">
+        <div class="flex items-center space-x-6">
+            <span class="iron-lady-logo font-bold">IRON LADY</span>
+        </div>
+        <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+            <span class="text-gray-600 text-lg md:text-xl font-semibold">Programs Dashboard</span>
+        </div>
+        <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+            <span id="user-id" class="text-xs sm:text-sm text-gray-500 rounded-full px-3 py-1 bg-gray-200">User ID: N/A</span>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="container mx-auto p-4 sm:p-8 flex flex-col items-center justify-center space-y-8 lg:space-y-0 lg:space-x-12">
+        
+        <!-- Right Side: Program Details & App -->
+        <div class="program-card flex-grow w-full max-w-4xl">
+            <div class="flex border-b border-gray-200 mb-6 flex-wrap">
+                <button id="tab-todo" class="tab-btn py-2 px-4 text-center font-medium text-gray-600 hover:text-red-600 hover:border-red-600 transition-colors duration-200 border-b-2 border-transparent focus:outline-none active">To-Do List</button>
+                <button id="tab-courses" class="tab-btn py-2 px-4 text-center font-medium text-gray-600 hover:text-red-600 hover:border-red-600 transition-colors duration-200 border-b-2 border-transparent focus:outline-none">Course Management</button>
+                <button id="tab-feedback" class="tab-btn py-2 px-4 text-center font-medium text-gray-600 hover:text-red-600 hover:border-red-600 transition-colors duration-200 border-b-2 border-transparent focus:outline-none">Student Feedback</button>
+            </div>
+
+            <!-- Tab Content -->
+
+            <!-- To-Do List Section -->
+            <div id="content-todo" class="tab-content active">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Manage Your Tasks</h3>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center mb-6 space-y-2 sm:space-y-0 sm:space-x-2">
+                    <input id="new-task-input" type="text" placeholder="Add a new task..." class="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 transition-shadow">
+                    <button id="add-task-btn" class="bg-red-600 text-white p-3 rounded-lg shadow-md hover:bg-red-700 transition-colors flex-shrink-0 font-bold uppercase">Add Task</button>
+                </div>
+                <div id="task-list" class="space-y-4"></div>
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="flex flex-col sm:flex-row items-center justify-between mb-4 space-y-2 sm:space-y-0">
+                        <h4 class="text-xl font-semibold text-gray-800">AI Task Suggester</h4>
+                        <button id="generate-suggestions-btn" class="bg-red-600 text-white p-2 rounded-lg text-sm shadow-md hover:bg-red-700 transition-colors font-bold uppercase">Generate Suggestions</button>
+                    </div>
+                    <div id="tasks-summary-output" class="p-4 bg-red-50 text-red-800 rounded-lg hidden">
+                        <div class="flex items-center space-x-2">
+                            <svg id="tasks-summary-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-red-600 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <p id="tasks-summary-text" class="text-sm italic"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Management Section -->
+            <div id="content-courses" class="tab-content">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Manage Your Courses</h3>
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label for="course-title" class="block text-sm font-medium text-gray-700">Course Title</label>
+                        <input id="course-title" type="text" placeholder="e.g., Strategic Pitching" class="mt-1 block w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 transition-shadow">
+                    </div>
+                    <div>
+                        <label for="course-desc" class="block text-sm font-medium text-gray-700">Course Description</label>
+                        <textarea id="course-desc" rows="4" placeholder="Briefly describe the course content..." class="mt-1 block w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 transition-shadow"></textarea>
+                    </div>
+                    <button id="add-course-btn" class="w-full bg-red-600 text-white p-3 rounded-lg shadow-md hover:bg-red-700 transition-colors font-bold uppercase">Add Course</button>
+                </div>
+                <div id="course-list" class="space-y-4"></div>
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="flex flex-col sm:flex-row items-center justify-between mb-4 space-y-2 sm:space-y-0">
+                        <h4 class="text-xl font-semibold text-gray-800">AI Program Recommender</h4>
+                        <button id="recommend-course-btn" class="bg-red-600 text-white p-2 rounded-lg text-sm shadow-md hover:bg-red-700 transition-colors font-bold uppercase">Get Recommendation</button>
+                    </div>
+                    <div id="courses-summary-output" class="p-4 bg-red-50 text-red-800 rounded-lg hidden">
+                        <div class="flex items-center space-x-2">
+                            <svg id="courses-summary-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-red-600 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <p id="courses-summary-text" class="text-sm italic"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Feedback Section -->
+            <div id="content-feedback" class="tab-content">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Manage Student Feedback</h3>
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label for="feedback-title" class="block text-sm font-medium text-gray-700">Feedback Title</label>
+                        <input id="feedback-title" type="text" placeholder="e.g., Great Lecture" class="mt-1 block w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 transition-shadow">
+                    </div>
+                    <div>
+                        <label for="feedback-comment" class="block text-sm font-medium text-gray-700">Your Comments</label>
+                        <textarea id="feedback-comment" rows="4" placeholder="Share your thoughts on the course..." class="mt-1 block w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 transition-shadow"></textarea>
+                    </div>
+                    <button id="submit-feedback-btn" class="w-full bg-red-600 text-white p-3 rounded-lg shadow-md hover:bg-red-700 transition-colors font-bold uppercase">Submit Feedback</button>
+                </div>
+                <div id="feedback-list" class="space-y-4"></div>
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="flex flex-col sm:flex-row items-center justify-between mb-4 space-y-2 sm:space-y-0">
+                        <h4 class="text-xl font-semibold text-gray-800">AI Feedback Summary</h4>
+                        <button id="summarize-feedback-btn" class="bg-red-600 text-white p-2 rounded-lg text-sm shadow-md hover:bg-red-700 transition-colors font-bold uppercase">Generate Summary</button>
+                    </div>
+                    <div id="feedback-summary-output" class="p-4 bg-red-50 text-red-800 rounded-lg hidden">
+                        <div class="flex items-center space-x-2">
+                            <svg id="feedback-summary-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-red-600 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <p id="feedback-summary-text" class="text-sm italic"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for editing and messages -->
+    <div id="modal-container" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-lg p-6 shadow-2xl w-full max-w-sm">
+            <h3 id="modal-title" class="text-lg font-bold mb-4"></h3>
+            <p id="modal-message" class="text-gray-700 mb-4 hidden"></p>
+            <input id="modal-input" type="text" class="w-full p-2 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-red-500 transition-shadow">
+            <div class="flex justify-end space-x-2">
+                <button id="modal-cancel-btn" class="px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-200 transition-colors">Cancel</button>
+                <button id="modal-confirm-btn" class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors">Save</button>
+            </div>
+        </div>
+    </div>
+    
+<script>
+    // --- UI Elements ---
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const userIdDisplay = document.getElementById('user-id');
+
+    // To-Do List elements
+    const newTaskInput = document.getElementById('new-task-input');
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const taskList = document.getElementById('task-list');
+    const generateSuggestionsBtn = document.getElementById('generate-suggestions-btn');
+    const tasksSummaryOutput = document.getElementById('tasks-summary-output');
+    const tasksSummaryText = document.getElementById('tasks-summary-text');
+
+    // Courses elements
+    const courseTitleInput = document.getElementById('course-title');
+    const courseDescInput = document.getElementById('course-desc');
+    const addCourseBtn = document.getElementById('add-course-btn');
+    const courseList = document.getElementById('course-list');
+    const recommendCourseBtn = document.getElementById('recommend-course-btn');
+    const coursesSummaryOutput = document.getElementById('courses-summary-output');
+    const coursesSummaryText = document.getElementById('courses-summary-text');
+
+    // Feedback elements
+    const feedbackTitleInput = document.getElementById('feedback-title');
+    const feedbackCommentInput = document.getElementById('feedback-comment');
+    const submitFeedbackBtn = document.getElementById('submit-feedback-btn');
+    const feedbackList = document.getElementById('feedback-list');
+    const summarizeFeedbackBtn = document.getElementById('summarize-feedback-btn');
+    const feedbackSummaryOutput = document.getElementById('feedback-summary-output');
+    const feedbackSummaryText = document.getElementById('feedback-summary-text');
+
+    // --- Tab switching ---
+    function switchTab(targetId) {
+        tabBtns.forEach(btn => btn.classList.toggle('active', btn.id.replace('tab-', '') === targetId));
+        tabContents.forEach(content => content.classList.toggle('active', content.id.replace('content-', '') === targetId));
+    }
+    tabBtns.forEach(btn => btn.addEventListener('click', () => switchTab(btn.id.replace('tab-', ''))));
+
+    // --- Generic CRUD Functions for Flask ---
+    async function loadItems(endpoint, renderFunc) {
+        const res = await fetch(endpoint);
+        const items = await res.json();
+        renderFunc(items);
+    }
+
+    async function addItem(endpoint, data, callback) {
+        await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        callback();
+    }
+    async function addCourse() { 
+        addItem("/add_course", { title: courseTitleInput.value.trim(), description: courseDescInput.value.trim() }, loadCourses); 
+        courseTitleInput.value=""; 
+        courseDescInput.value=""; 
+    }
+
+    async function updateItem(endpoint, data, callback) {
+        await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        callback();
+    }
+
+    async function deleteItem(endpoint, data, callback) {
+        await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        callback();
+    }
+    async function deleteCourse(id) {
+        await fetch("/delete_course", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({id}) });
+        loadCourses();  // reload list after delete
+    }
+
+    async function deleteFeedback(id) {
+        await fetch("/delete_feedback", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({id}) });
+        loadFeedback();  // reload list after delete
+    }
+
+    // --- Render Functions ---
+    function renderTasks(tasks) {
+        taskList.innerHTML = "";
+        tasks.forEach(task => {
+            const taskItem = document.createElement("div");
+            taskItem.className = `flex items-center justify-between p-4 rounded-lg shadow-sm border ${task.completed ? 'bg-green-50' : 'bg-white'}`;
+            taskItem.innerHTML = `
+                <div class="flex-grow mr-4 ${task.completed ? 'line-through text-gray-500' : 'text-gray-800'}">${task.text}</div>
+                <div class="flex space-x-2">
+                    <button class="p-2 rounded-full ${task.completed ? 'bg-gray-300' : 'bg-green-500 hover:bg-green-600'}" onclick="updateTask('${task.id}', undefined, ${!task.completed})">✔</button>
+                    <button class="p-2 rounded-full bg-yellow-500 hover:bg-yellow-600 text-white" onclick="editTask('${task.id}', '${task.text}')">✎</button>
+                    <button class="p-2 rounded-full bg-red-500 hover:bg-red-600 text-white" onclick="deleteTask('${task.id}')">🗑</button>
+                </div>
+            `;
+            taskList.appendChild(taskItem);
+        });
+    }
+
+    function renderCourses(courses) {
+        courseList.innerHTML = "";
+        courses.forEach(course => {
+            const courseItem = document.createElement("div");
+            courseItem.className = "bg-white p-4 rounded-lg shadow-sm border mb-2";
+            courseItem.innerHTML = `
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="font-bold text-gray-800">${course.title}</h3>
+                    <button onclick="deleteCourse('${course.id}')" class="text-red-500 hover:text-red-700">🗑</button>
+                </div>
+                <p class="text-gray-700 text-sm">${course.description}</p>
+            `;
+            courseList.appendChild(courseItem);
+        });
+    }
+
+
+    function renderFeedback(feedbackItems) {
+        feedbackList.innerHTML = "";
+        feedbackItems.forEach(item => {
+            const feedbackItem = document.createElement("div");
+            feedbackItem.className = "bg-white p-4 rounded-lg shadow-sm border mb-2";
+            feedbackItem.innerHTML = `
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="font-bold text-gray-800">${item.title}</h3>
+                    <button onclick="deleteFeedback('${item.id}')" class="text-red-500 hover:text-red-700">🗑</button>
+                </div>
+                <p class="text-gray-700 text-sm">${item.comment}</p>
+            `;
+            feedbackList.appendChild(feedbackItem);
+        });
+    }
+
+
+    async function addCourse() { 
+        addItem("/add_course", { 
+            title: courseTitleInput.value.trim(), 
+            description: courseDescInput.value.trim()   // ✅ correct key
+        }, loadCourses); 
+        courseTitleInput.value = ""; 
+        courseDescInput.value = ""; 
+    }
+
+    // --- Task CRUD ---
+    async function loadTasks() { loadItems("/get_tasks", renderTasks); }
+    async function addTodo() { addItem("/add_task", { text: newTaskInput.value.trim() }, loadTasks); newTaskInput.value=""; }
+    async function updateTask(id, text, completed) { updateItem("/update_task", { id, text, completed }, loadTasks); }
+    async function deleteTask(id) { deleteItem("/delete_task", { id }, loadTasks); }
+    function editTask(id, oldText) { const newText = prompt("Edit your task:", oldText); if(newText && newText!==oldText) updateTask(id,newText,undefined); }
+
+    // --- Course CRUD ---
+    async function loadCourses() { loadItems("/get_courses", renderCourses); }
+    // async function addCourse() { addItem("/add_course", { title: courseTitleInput.value.trim(), desc: courseDescInput.value.trim() }, loadCourses); courseTitleInput.value=""; courseDescInput.value=""; }
+    async function deleteCourse(id) { deleteItem("/delete_course", { id }, loadCourses); }
+
+    // --- Feedback CRUD ---
+    async function loadFeedback() { loadItems("/get_feedback", renderFeedback); }
+    async function submitFeedback() { addItem("/submit_feedback", { title: feedbackTitleInput.value.trim(), comment: feedbackCommentInput.value.trim() }, loadFeedback); feedbackTitleInput.value=""; feedbackCommentInput.value=""; }
+    async function deleteFeedback(id) { deleteItem("/delete_feedback", { id }, loadFeedback); }
+
+    // --- AI Suggestions (Generic) ---
+    // --- AI Suggestions ---
+    async function generateTaskSuggestions() {
+        const res = await fetch("/generate_suggestions");
+        const data = await res.json();
+        tasksSummaryOutput.classList.remove("hidden");
+
+        if (data.suggestions) {
+            // Split lines and clean them
+            const lines = data.suggestions.split("\n").filter(line => line.trim() !== "");
+            const listItems = lines.map(line => {
+                // Remove leading bullets or numbering like "* ", "-", "1. "
+                return `<li>${line.replace(/^(\*+|\-+|\d+\.)\s*/, '')}</li>`;
+            }).join("");
+
+            tasksSummaryText.innerHTML = `<ul>${listItems}</ul>`;
+        } else {
+            tasksSummaryText.textContent = "No suggestions available.";
+        }
+    }
+
+
+    async function recommendCourses() {
+        const res = await fetch("/ai/courses");
+        const data = await res.json();
+        coursesSummaryOutput.classList.remove("hidden");
+        if (data.recommendations) {
+            coursesSummaryText.innerHTML = data.recommendations.map(r => `<li>${r}</li>`).join("");
+        } else {
+            coursesSummaryText.textContent = data.error || "No course recommendations available.";
+        }
+    }
+
+
+    async function summarizeFeedback() {
+        const res = await fetch("/ai/feedback");
+        const data = await res.json();
+        feedbackSummaryOutput.classList.remove("hidden");
+        feedbackSummaryText.textContent = data.summary || data.error || "No summary available.";
+    }
+
+    async function generateCourseSuggestions() {
+        const res = await fetch("/ai/courses");
+        const data = await res.json();
+
+        courseAIOutput.classList.remove("hidden");
+        if (data.recommendations) {
+            courseAIOutput.innerHTML = data.recommendations.map(r => `<li>${r}</li>`).join("");
+        } else {
+            courseAIOutput.textContent = data.error || "No suggestions available.";
+        }
+    }
+    async function generateFeedbackSummary() {
+        const res = await fetch("/ai/feedback");
+        const data = await res.json();
+
+        feedbackAIOutput.classList.remove("hidden");
+        feedbackAIOutput.textContent = data.summary || data.error || "No summary available.";
+    }
+
+
+    recommendCourseBtn.addEventListener("click", recommendCourses);
+    summarizeFeedbackBtn.addEventListener("click", summarizeFeedback);
+
+    // --- Event Listeners ---
+    addTaskBtn.addEventListener("click", addTodo);
+    generateSuggestionsBtn.addEventListener("click", generateTaskSuggestions);
+    addCourseBtn.addEventListener("click", addCourse);
+    submitFeedbackBtn.addEventListener("click", submitFeedback);
+
+    // --- Initial Load ---
+    loadTasks();
+    loadCourses();
+    loadFeedback();
+</script>
+
+</body>
+</html>
