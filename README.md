@@ -1,18 +1,5 @@
 # Iron_lady_Simple_App with AI Features
-
-## Project Description
-This is a full-stack web application built using **Flask** for the backend and **HTML, CSS, JavaScript** for the frontend. The app provides users with a productivity suite including:
-
-- **To-Do Manager:** Add, edit, delete, and mark tasks as complete.  
-- **Course Management:** Add courses, view course details (title + description), and delete courses.  
-- **Student Feedback:** Submit feedback with title and comment, view feedback, and delete feedback.  
-- **AI-Powered Features (Bonus):**  
-  - Generate suggested productivity tasks based on current tasks  
-  - Recommend new courses using AI  
-  - Summarize student feedback automatically  
-
-The AI integration is powered by **Google Gemini AI** via the `google.generativeai` Python library.
-
+---
 ---
 
 ## 🎬 Project Demo
@@ -27,6 +14,22 @@ The AI integration is powered by **Google Gemini AI** via the `google.generative
 </div>
 
 ---
+---
+
+## Project Description
+This is a full-stack web application built using **Flask** for the backend and **HTML, CSS, JavaScript** for the frontend. The app provides users with a productivity suite including:
+
+- **To-Do Manager:** Add, edit, delete, and mark tasks as complete.  
+- **Course Management:** Add courses, view course details (title + description), and delete courses.  
+- **Student Feedback:** Submit feedback with title and comment, view feedback, and delete feedback.  
+- **AI-Powered Features (Bonus):**  
+  - Generate suggested productivity tasks based on current tasks  
+  - Recommend new courses using AI  
+  - Summarize student feedback automatically  
+
+The AI integration is powered by **Google Gemini AI** via the `google.generativeai` Python library.
+
+
 ## Features
 
 ### To-Do Manager
