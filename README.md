@@ -1,6 +1,5 @@
 # Iron_lady_Simple_App with AI Features
 ---
----
 
 ## 🎬 Project Demo
 
@@ -14,7 +13,7 @@
 </div>
 
 ---
----
+
 
 ## Project Description
 This is a full-stack web application built using **Flask** for the backend and **HTML, CSS, JavaScript** for the frontend. The app provides users with a productivity suite including:
