@@ -4,11 +4,11 @@
 ## 🎬 Project Demo
 
 <div align="center">
-  <a href="https://youtu.be/PSHRHqCNWRQ" target="_blank">
+  <a href="https://www.youtube.com/watch?v=5089ZueJhzM" target="_blank">
     <img src="thumbnail.png" alt="Watch Flexible Emotion Detector Demo" width="640">
   </a>
   <br>
-  <strong><a href="https://youtu.be/PSHRHqCNWRQ" target="_blank">▶️ Watch: Iron Lady simple app demo </a></strong>
+  <strong><a href="https://www.youtube.com/watch?v=5089ZueJhzM" target="_blank">▶️ Watch: Iron Lady simple app demo </a></strong>
   <p>Video by Data Science Solutions</p>
 </div>
 
